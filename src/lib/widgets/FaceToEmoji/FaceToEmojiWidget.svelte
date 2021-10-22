@@ -6,18 +6,25 @@
 	import InputDropzone from '$lib/common/Input/InputDropzone.svelte';
 	import WidgetWraper from '$lib/common/Widget/WidgetWraper.svelte';
 	import EmojisLayer from '$lib/widgets/FaceToEmoji/EmojisLayer.svelte';
+	import DisplayDetails from '$lib/widgets/FaceToEmoji/DisplayDetails.svelte';
 
 	//types
 	import type { CleanedAnnotation } from './types';
+	import type { Detail } from '$lib/types';
 
 	//helpers
-	import { extractAndCleanFacesAnnotations, getResponseFromGoogleVision } from './helpers';
+	import {
+		extractAndCleanFacesAnnotations,
+		faceFocused,
+		getResponseFromGoogleVision
+	} from './helpers';
 
 	//states
 	let isLoading: boolean = false;
 	let error: string = '';
 	let output: Array<CleanedAnnotation> = [];
 	let outputJson: string;
+	let details: Detail[];
 
 	async function onSelectFile(file) {
 		if (!file) {
@@ -27,7 +34,9 @@
 		error = '';
 
 		try {
+			//responses from API
 			const res = await getResponseFromGoogleVision(file);
+
 			// Reset values
 			isLoading = false;
 			output = [];
@@ -48,9 +57,12 @@
 				error = 'TODO: anticipate all other cases of error';
 			}
 		} catch (error) {
-			error = 'TODO: anticipate all other cases of error : {error}';
+			error = 'TODO: anticipate all other cases of error : ' + error;
 		}
 	}
+
+	//reactivity
+	$: details = output?.[$faceFocused]?.likelihoods;
 </script>
 
 <WidgetWraper {error} {outputJson}>
@@ -77,5 +89,11 @@
 				{/if}
 			</InputDropzone>
 		</form>
+	</svelte:fragment>
+
+	<svelte:fragment slot="output">
+		{#if details}
+			<DisplayDetails {details} />
+		{/if}
 	</svelte:fragment>
 </WidgetWraper>
