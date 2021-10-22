@@ -30,7 +30,9 @@
 		if (!file) {
 			return;
 		}
+
 		isLoading = true;
+		faceFocused.set(null);
 		error = '';
 
 		try {
@@ -76,24 +78,15 @@
 				let:imgSrc
 			>
 				{#if imgSrc}
-					{#key imgSrc}
-						<EmojisLayer {output} {isLoading} {error}>
-							<img
-								in:fade
-								src={imgSrc}
-								class="pointer-events-none shadow mx-auto max-h-44"
-								alt=""
-							/>
-						</EmojisLayer>
-					{/key}
+					<EmojisLayer {output} {isLoading} {error}>
+						<img in:fade src={imgSrc} class="pointer-events-none shadow mx-auto max-h-44" alt="" />
+					</EmojisLayer>
 				{/if}
 			</InputDropzone>
 		</form>
 	</svelte:fragment>
 
 	<svelte:fragment slot="output">
-		{#if details}
-			<DisplayDetails {details} />
-		{/if}
+		<DisplayDetails {details} />
 	</svelte:fragment>
 </WidgetWraper>
