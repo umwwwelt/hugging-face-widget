@@ -52,22 +52,29 @@
 	}
 </script>
 
-<WidgetWraper>
+<WidgetWraper {error} {outputJson}>
 	<svelte:fragment slot="input">
-		<InputDropzone
-			{onSelectFile}
-			{isLoading}
-			onError={(e) => (error = e)}
-			label="Drag image with face(s) here 🙃"
-			let:imgSrc
-		>
-			{#if imgSrc}
-				{#key imgSrc}
-					<EmojiDisplayer {output} {isLoading} {error}>
-						<img in:fade src={imgSrc} class="pointer-events-none shadow mx-auto max-h-44" alt="" />
-					</EmojiDisplayer>
-				{/key}
-			{/if}
-		</InputDropzone>
+		<form in:fade={{ delay: 600 }}>
+			<InputDropzone
+				{onSelectFile}
+				{isLoading}
+				onError={(e) => (error = e)}
+				label="Drag image with face(s) here 🙃"
+				let:imgSrc
+			>
+				{#if imgSrc}
+					{#key imgSrc}
+						<EmojiDisplayer {output} {isLoading} {error}>
+							<img
+								in:fade
+								src={imgSrc}
+								class="pointer-events-none shadow mx-auto max-h-44"
+								alt=""
+							/>
+						</EmojiDisplayer>
+					{/key}
+				{/if}
+			</InputDropzone>
+		</form>
 	</svelte:fragment>
 </WidgetWraper>

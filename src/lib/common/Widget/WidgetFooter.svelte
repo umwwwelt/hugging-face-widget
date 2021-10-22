@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 	import IconCode from '$lib/icons/IconCode.svelte';
+	import { slide } from 'svelte/transition';
 
 	export let outputJson: string;
 
@@ -20,5 +21,6 @@
 </div>
 {#if outputJson && isOutputJsonVisible}
 	<pre
-		class="mt-3 max-h-screen overflow-auto text-xs text-gray-600 bg-gray-100 dark:bg-gray-800 p-2 rounded">{outputJson}</pre>
+		transition:slide|local
+		class="mt-3 max-h-64 overflow-auto text-xs text-gray-600 bg-gray-100 dark:bg-gray-800 p-2 rounded">{outputJson}</pre>
 {/if}
