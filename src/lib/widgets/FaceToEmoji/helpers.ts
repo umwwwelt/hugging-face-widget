@@ -2,7 +2,7 @@ import { LikelihoodValueEnum } from './types';
 
 import type { Likelihood, RequestBodyVision, CleanedAnnotation, FaceAnnotation } from './types';
 
-//WARNING - Security issue here - API credential key is public !
+// WARNING - Security issue here - API credential key is public !
 // It's not safe for static website, but it could be replace by server endpoint
 
 const API_KEY = import.meta.env.VITE_GOOGLE_APPLICATION_CREDENTIALS;
@@ -20,19 +20,6 @@ export const toBase64 = (file): Promise<string> => {
 	});
 };
 
-// export async function getAsByteArray(file) {
-// 	return new Uint8Array(await readFile(file));
-// }
-
-// function readFile(file) {
-// 	return new Promise((resolve, reject) => {
-// 		let reader = new FileReader();
-// 		reader.addEventListener("loadend", (e) => resolve(e.target.result));
-// 		reader.addEventListener("error", reject);
-// 		reader.readAsArrayBuffer(file);
-// 	});
-// }
-
 // API call
 export async function getResponseFromGoogleVision(file: File | Blob): Promise<Response> {
 	const requestBody: RequestBodyVision = {
@@ -46,6 +33,9 @@ export async function getResponseFromGoogleVision(file: File | Blob): Promise<Re
 
 	return fetch(`https://vision.googleapis.com/v1/images:annotate?key=${API_KEY}`, {
 		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json; charset=utf-8'
+		},
 		body: JSON.stringify(requestBody)
 	});
 }
@@ -68,6 +58,8 @@ export function extractAndCleanFacesAnnotations(
 					return { label: Object.keys(a)[0], value: Object.values(a)[0] };
 				})
 				.sort((a, b) => (LikelihoodValueEnum[a.value] > LikelihoodValueEnum[b.value] ? -1 : 1));
+
+			console.log('likelihoods : ', likelihoods);
 
 			return {
 				positions: fdBoundingPoly.vertices,

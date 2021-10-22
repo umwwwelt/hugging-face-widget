@@ -53,10 +53,3 @@
 	<!-- photo slot -->
 	<slot />
 </div>
-
-<style>
-	/* TODO: transfer w-fit to global (Tailwind don't have fit-content) 🤔 */
-	.w-fit {
-		width: fit-content;
-	}
-</style>

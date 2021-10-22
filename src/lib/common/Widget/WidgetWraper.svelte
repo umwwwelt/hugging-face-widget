@@ -33,7 +33,7 @@
 		<slot name="input" />
 
 		{#if error}
-			<div in:slide class="mt-3 text-center text-sm text-orange-500">{error}</div>
+			<div in:slide class="my-3 text-center text-sm text-orange-500">{error}</div>
 		{/if}
 
 		<slot name="output" />

@@ -1,13 +1,13 @@
 <script lang="ts">
 	import IconCode from '$lib/icons/IconCode.svelte';
-	import { slide } from 'svelte/transition';
+	import { fly, slide } from 'svelte/transition';
 
 	export let outputJson: string;
 
 	let isOutputJsonVisible = false;
 </script>
 
-<div class="mt-auto pt-4 flex items-center text-xs text-gray-500">
+<div in:fly={{ delay: 400, y: 5 }} class="mt-auto pt-4 flex items-center text-xs text-gray-500">
 	<button
 		class="flex items-center {outputJson ? '' : 'cursor-not-allowed text-gray-300'}"
 		disabled={!outputJson}

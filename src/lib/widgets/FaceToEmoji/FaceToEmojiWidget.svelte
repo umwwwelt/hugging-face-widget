@@ -5,7 +5,7 @@
 	//components
 	import InputDropzone from '$lib/common/Input/InputDropzone.svelte';
 	import WidgetWraper from '$lib/common/Widget/WidgetWraper.svelte';
-	import EmojiDisplayer from '$lib/widget/FaceToEmoji/EmojiDisplayer.svelte';
+	import EmojisLayer from '$lib/widgets/FaceToEmoji/EmojisLayer.svelte';
 
 	//types
 	import type { CleanedAnnotation } from './types';
@@ -31,6 +31,7 @@
 			// Reset values
 			isLoading = false;
 			output = [];
+			outputJson = '';
 
 			if (res.status == 200) {
 				const data = await res.json();
@@ -54,7 +55,7 @@
 
 <WidgetWraper {error} {outputJson}>
 	<svelte:fragment slot="input">
-		<form in:fade={{ delay: 600 }}>
+		<form in:fade={{ delay: 800 }}>
 			<InputDropzone
 				{onSelectFile}
 				{isLoading}
@@ -64,14 +65,14 @@
 			>
 				{#if imgSrc}
 					{#key imgSrc}
-						<EmojiDisplayer {output} {isLoading} {error}>
+						<EmojisLayer {output} {isLoading} {error}>
 							<img
 								in:fade
 								src={imgSrc}
 								class="pointer-events-none shadow mx-auto max-h-44"
 								alt=""
 							/>
-						</EmojiDisplayer>
+						</EmojisLayer>
 					{/key}
 				{/if}
 			</InputDropzone>
