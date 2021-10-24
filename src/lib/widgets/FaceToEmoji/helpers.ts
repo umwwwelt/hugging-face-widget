@@ -64,8 +64,6 @@ export function extractAndCleanFacesAnnotations(
 				})
 				.sort((a, b) => (LikelihoodValueEnum[a.value] > LikelihoodValueEnum[b.value] ? -1 : 1));
 
-			console.log('likelihoods : ', likelihoods);
-
 			return {
 				positions: fdBoundingPoly.vertices,
 				likelihoods

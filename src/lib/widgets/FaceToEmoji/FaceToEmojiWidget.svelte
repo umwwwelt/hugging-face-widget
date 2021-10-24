@@ -67,9 +67,9 @@
 	$: details = output?.[$faceFocused]?.likelihoods;
 </script>
 
-<WidgetWraper {error} {outputJson}>
+<WidgetWraper title="Emoji motion" category="Face Detection" {error} {outputJson}>
 	<svelte:fragment slot="input">
-		<form in:fade={{ delay: 800 }}>
+		<form in:fade={{ delay: 500 }}>
 			<InputDropzone
 				{onSelectFile}
 				{isLoading}

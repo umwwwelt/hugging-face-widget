@@ -5,8 +5,8 @@
 	import IconLightning from '$lib/icons/IconLightning.svelte';
 	import WidgetFooter from './WidgetFooter.svelte';
 
-	export let title: string = 'Emotion to Emojis';
-	export let category: string = 'Faces Detection';
+	export let title: string = 'Title';
+	export let category: string = 'Category';
 
 	export let error: string;
 	export let outputJson: string;
