@@ -4,24 +4,23 @@
 
 ## Project
 
-The idea was to capture face detection data from Google Cloud Vision API. Then create a layer over the image containing emojis overlaying the faces.
-
-Then make the emoji match the _"feeling"_ detected by the AI.
+The purpose was to transform data fetched from a face detection AI _Google Cloud Vision_.
+I used positions and _sentiments_ of faces detected by the AI to create a layer containing emojis overlaying the faces.
 
 ## Obstacles encountered
 
-- Layer selection (Css + svg vs. Canvas)
+- Layer selection (CSS + SVG vs. Canvas)
 - How to call the API in a secure way
 - Several unsuccessful tests on the display of textual data below the image
-- Hesitation on the widget components following the analysis of the code available in the HUB
-- Tailwind is not ideal with svelte vs. SCSS but some nice and interesting discoveries in its use.
+- I wasn't sure how to code the widget components after I analysed the code available in the HUB.
+- Tailwind is not ideal with Svelte, compared to SCSS, but some nice and interesting discoveries/features in its use.
 
 ## To go further
 
-With more time it is possible to add granularity obviously in the emojis selection; _Rekognition_ in this sense is maybe better and to tell the truth : I went to _google/cloud-vision_ for ease of use (I already had an account with ~280$ of credits) but after several tests : _Rekognition_ still tends to be polarized on the results (e.g. _99.3% Happy_, when there is only one little smile)
+For each sentiment (in a list of 4: joy, anger, sorrow, surprise) _Google Cloud Vision_ provides a degree of likelihood. I converted these degrees into emojis. My goal in further work is to add granularity in the emojis selection, by studying different ways of combining sentiments. Even though _Rekognition_ could discriminate between 9 different sentiments, I found that one of its drawback was that its outputs tend to be more polarized (e.g. _99.3% Happy_, when there is only one little smile).
 
-The code is clearly improvable, as it's a hybrid between what you did for the widgets and the rather slight need for the exercise. I may have wasted some time on this.
+The code is clearly improvable, as it's a hybrid between what you did for the widgets and the limited need for the exercise. I may have spent a bit too much time on this.
 
 ## Observation attached
 
-I saw that you use `className` to pass `class` in components but did you know about `{$$props.class}` ? ?
+I saw that you use `className` to pass `class` in components but I can suggest to use `{$$props.class}` which requires fewer lines of code in the child component.
