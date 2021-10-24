@@ -1,11 +1,16 @@
-import { LikelihoodValueEnum } from './types';
+import { writable } from 'svelte/store';
 
+//type:
+import { LikelihoodValueEnum } from './types';
 import type { Likelihood, RequestBodyVision, CleanedAnnotation, FaceAnnotation } from './types';
 
 // WARNING - Security issue here - API credential key is public !
 // It's not safe for static website, but it could be replace by server endpoint
 
 const API_KEY = import.meta.env.VITE_GOOGLE_APPLICATION_CREDENTIALS;
+
+//stores
+export const faceFocused = writable(null as number);
 
 // transform file to Bytes or Base64
 export const toBase64 = (file): Promise<string> => {
@@ -58,8 +63,6 @@ export function extractAndCleanFacesAnnotations(
 					return { label: Object.keys(a)[0], value: Object.values(a)[0] };
 				})
 				.sort((a, b) => (LikelihoodValueEnum[a.value] > LikelihoodValueEnum[b.value] ? -1 : 1));
-
-			console.log('likelihoods : ', likelihoods);
 
 			return {
 				positions: fdBoundingPoly.vertices,

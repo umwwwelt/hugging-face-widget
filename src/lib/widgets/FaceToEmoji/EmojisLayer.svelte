@@ -14,8 +14,8 @@
 	export let isLoading: boolean;
 	export let error: string;
 
-	export let ratio: number = 0;
-	export let center: Coordonates = { x: 0, y: 0 };
+	let ratio: number = 0;
+	let center: Coordonates = { x: 0, y: 0 };
 
 	//ratio image
 	function calculateRatio(node: HTMLElement) {
