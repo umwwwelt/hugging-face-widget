@@ -14,6 +14,15 @@ export enum LikelihoodValueEnum {
 	VERY_LIKELY
 }
 
+export enum LikelihoodValueTranslation {
+	VERY_UNLIKELY = 'Very unlikely',
+	UNLIKELY = 'Unlikely',
+	UNKNOWN = 'Unknown',
+	POSSIBLE = 'Possible',
+	LIKELY = 'Likely',
+	VERY_LIKELY = 'Very likely'
+}
+
 export enum EmotionLikelihood {
 	joyLikelihood = 'joy',
 	sorrowLikelihood = 'sorrow',
